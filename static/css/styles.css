@@ -1,0 +1,13 @@
+body{
+    text-align: center;
+}
+.img{
+    width: 20%;
+    height: 20%;
+}
+.desc-div{
+    margin: 30px auto;
+}
+.img-desc{
+    margin: 20px auto;
+}
