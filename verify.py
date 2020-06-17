@@ -1,5 +1,8 @@
 # code to compare detection and input
 
-# Test code
+# Test logic
 def verify_desc(input):
-    return 0
+    if(len(input)>5):
+        return 1
+    else:
+        return 0

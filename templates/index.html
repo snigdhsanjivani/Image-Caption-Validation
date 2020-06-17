@@ -1,23 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'base.html' %}
+
+
+{% block head %}
     <title>Object Detection</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css')}}" >
+{% endblock head %}
 
-</head>
-<body>
+
+{% block body %}
     <header>
         <h1>
             Object Detection
         </h1>
     </header>
     <div >
-        <img class="img" src="{{ url_for('static', filename='images/mountain.jpg')}}" alt="image">
+        <!-- img(contains id and path) received from app.py -->
+        <!-- img.path is used to display image -->
+        <img class="img" src="{{ url_for('static', filename='images/mountain.png')}}" alt="image"> 
     </div>
     <div class="desc-div">
-        <form action="/" method="POST">
+        <!-- use img id send id in predict -->
+        <form action="/predict" method="POST">
             <label for="desc">Enter Description</label><br> 
             <input type="text" name="desc" id="img-desc"><br> 
             <input type="submit" value="Submit"> 
@@ -26,15 +29,17 @@
     {% if result == 1 %}
     </div>
         <h2>Correct</h2>
+        <!-- <a href="">Try again</a> -->
+        <a href="/">Next</a>
     <div>
     {% endif %}
 
     {% if result == 0 %}
     </div>
         <h2>Incorrect</h2>
+        <a href="#">Try again</a>
     <div>        
     {% endif %}
 
     </div>
-</body>
-</html>
+{% endblock body %}

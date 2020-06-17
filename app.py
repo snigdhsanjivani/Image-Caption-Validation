@@ -4,40 +4,29 @@ from verify import *
 
 app = Flask(__name__) 
  
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = 'root'
-# app.config['MYSQL_DB'] = 'MyDB'
- 
-# mysql = MySQL(app)
 
-
-# class ImgPath(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     path = db.Column(db.String(100), nullable = False)
-
-#     def __repr__(self):
-#         return '<Path %r>' %self.path
-
-# isTrue = 1              #default value = -1; for correct->1; for incorrect->0
-
-
-@app.route("/", methods=['GET', 'POST'])
+@app.route('/')
 def index():
-    isTrue = 1
+    # randomly or orderly(as per need) select an image from dataset and pass it to index.html
+    # return render_template('index.html', img = img_sel)    
+    return render_template('index.html')
+
+# @app.route("/predict/<int :id>", methods=['GET', 'POST'])
+# def predict(id):
+#     if(request.method == 'POST'):
+#         get data from id, extract image
+#         caption_pred = predict_caption()
+#         input_desc = request.form['desc']
+#         isTrue = verify_desc(input_desc, caption_pred)
+#     return render_template("index.html", result = isTrue) 
+
+@app.route("/predict", methods=['GET', 'POST'])
+def predict():
+    # initialize model
     if(request.method == 'POST'):
         input_desc = request.form['desc']
-        print(input_desc)
-        print("if1",isTrue)
-        isTrue = verify_desc(input_desc) 
-        print("if2",isTrue)
-        return redirect("/")
-    else:
-        # isTrue = verify_desc(input_desc)
-        print("else1", isTrue)
-        isTrue = verify_desc(input_desc) 
-        print("else2", isTrue)
-        return render_template('index.html', result = isTrue)
+        isTrue = verify_desc(input_desc)
+    return render_template("index.html", result = isTrue) 
 
 
 if __name__=='__main__':
@@ -46,6 +35,8 @@ if __name__=='__main__':
 
 
     """
+    to use commented code, database required
+
     [summary]
     start-> Select a random image from database
     Send it to frontend
@@ -55,6 +46,6 @@ if __name__=='__main__':
     Try again -> back to start
 
     [scripts]
-    description_generator.py
-    description_verify.py
+    description_generator.py(test)
+    description_verify.py(test)
     """
